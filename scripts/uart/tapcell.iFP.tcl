@@ -7,41 +7,43 @@ source ../../scripts/common/set_env.tcl
 #   set tool related parameter
 #===========================================================
 if { $FOUNDRY == "sky130" } {
-    set WIRE_RC_LAYER "met3"
+    set DISTANCE 14 
+    if { $TRACK == "HS" } {
+        set TAPCELL_MASTER "sky130_fd_sc_hs__tap_1" 
+        set ENDCAP_MASTER  "sky130_fd_sc_hs__fill_1"
+    } elseif { $TRACK == "HD" } {
+        set TAPCELL_MASTER "sky130_fd_sc_hd__tap_1"
+	set ENDCAP_MASTER  "sky130_fd_sc_hd__fill_1"
+    }
 } elseif { $FOUNDRY == "nangate45" } {
-    set WIRE_RC_LAYER "metal3"
+    set DISTANCE 120
+    set TAPCELL_MASTER "TAPCELL_X1"
+    set ENDCAP_MASTER  "TAPCELL_X1"
 } elseif { $FOUNDRY == "asap7" } {
-    set WIRE_RC_LAYER "M3"
+    set DISTANCE 25
+    set TAPCELL_MASTER "TAPCELL_ASAP7_75t_R"
+    set ENDCAP_MASTER  "TAPCELL_ASAP7_75t_R"
 }
-
-set PLACE_DENSITY   "0.5"
 
 #===========================================================
 #   main running
 #===========================================================
-# Read lef
+# read data
 foreach lef $LEF_FILES {
     read_lef $lef
 }
 
-# Read liberty files
-foreach libFile $LIB_FILES {
-    read_liberty $libFile
-}
-
-# Read def file
+#read_def "./SYN.def"
 read_def $PRE_RESULT_PATH/$DESIGN.def
-# Read sdc file
-read_sdc $SDC_FILE
 
-set_wire_rc -layer $WIRE_RC_LAYER
 
-global_placement -density $PLACE_DENSITY
+tapcell \
+   -tapcell sky130_fd_sc_hs__tap_1 \
+   -distance 14 \
+   -endcap sky130_fd_sc_hs__fill_1
 
-#global_placement -incremental -overflow 0.1 -density $PLACE_DENSITY
+# output
+write_def $RESULT_PATH/$DESIGN.def
 
-# write output
-write_def       $RESULT_PATH/$DESIGN.def
-write_verilog   $RESULT_PATH/$DESIGN.v
 exit
 

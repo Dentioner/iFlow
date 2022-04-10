@@ -16,7 +16,7 @@ if { $FOUNDRY == "sky130" } {
     set LAYER_M5            met5
     set LAYER_M6            met6
     set LAYER_M7            met7
-    set SIGNAL_LAYER        "met2-met4"
+    set SIGNAL_LAYER        "met2-met5"
     set CLOCK_LAYER         "met2-met3"
 } elseif { $FOUNDRY == "nangate45" } {
 #    set MAX_ROUTING_LAYER   "6" 
@@ -30,7 +30,7 @@ if { $FOUNDRY == "sky130" } {
     set LAYER_M8            metal8
     set LAYER_M9            metal9
     set LAYER_M10           metal10
-    set SIGNAL_LAYER        "metal2-metal6"
+    set SIGNAL_LAYER        "metal2-metal8"
     set CLOCK_LAYER         "metal2-metal5"
 } elseif { $FOUNDRY == "asap7" } {
     set MAX_ROUTING_LAYER   "6" 
@@ -43,7 +43,7 @@ if { $FOUNDRY == "sky130" } {
     set LAYER_M7            M7
     set LAYER_M8            M8
     set LAYER_M9            M9
-    set SIGNAL_LAYER        "M2-M6"
+    set SIGNAL_LAYER        "M2-M8"
     set CLOCK_LAYER         "M2-M5"
 }
 #===========================================================
