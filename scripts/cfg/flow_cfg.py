@@ -20,4 +20,6 @@ gcd             = Flow('gcd','sky130','HS','TYP')
 uart            = Flow('uart','asap7','HS','TYP')
 ibex            = Flow('ibex_core','sky130','HS','TYP')
 picorv32        = Flow('picorv32','sky130','HS','TYP')
-
+mycpu           = Flow('mycpu_top','sky130','HS','TYP')
+riscv           = Flow('riscv_cpu','sky130','HS','TYP')
+serv            = Flow('serv_top','sky130','HS','TYP')
